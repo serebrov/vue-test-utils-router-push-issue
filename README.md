@@ -1,4 +1,17 @@
-## Description
+## Summary
+
+* The issue: components `beforeMount` hook is called once when the component is rendered (this is expected), and for the second time when route is updated, but still points to the same component:
+  * We start with `/`
+  * We go to the `/user/1/post1` (points to the component with children)
+  * The `beforeMount` is called
+  * We go to the `/user/1/post2` (points to the same component)
+* Problem: the `beforeMount` is called again
+  * This only happens in tests, not in the real app
+  * This works in v1.0.0-beta.29, but fails in v1.0.0-beta.30 and up
+  * The issue is only reproduced when we use `Vue.extend` to define the component (or with class-based components)
+  * Breaking change: this [commit](https://github.com/vuejs/vue-test-utils/commit/0c07653ddff92fbbc8852256ee99e1c41476e6ab), changes with `_Ctor = {}` assignments.
+
+## Details
 
 There is an issue with vue test utils beta 30 and up: when there are nested components and we use `Vue.extend` to defined components.
 The [failing](./tests/unit/router.spec.js) test passes successfully in beta 29, but fails in beta 30:
