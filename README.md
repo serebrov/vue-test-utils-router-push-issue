@@ -83,6 +83,9 @@ It also works if we don't use `Vue.extend` to define the component:
 
 And `Vue.extend` is needed for typescript-based setup, to have the typing working for components (also, I am actually using vue class-based [components](https://vuejs.org/v2/guide/typescript.html#Class-Style-Vue-Components) which is the best setup I found to make use of typescript checks for Vue components).
 
+One more note: I was *not* able to reproduce the issue with vue test utils codebase - the same test passes with beta 30.
+There is a [modified version](./vue-test-utils-test-example.spec.js) that runs the same test twice that fails, but I am not sure if this is exactly same issue as described above, but maybe it will be useful too.
+
 ## Project setup
 
 Project is generated with vue cli (default settings + unit-mocha, vue router and vue test utils):
