@@ -21,9 +21,9 @@ describe("router.push", () => {
       },
       {
         path: "/user/:id",
-        // component: User,
+        // It works, if we don't use Vue.extend.
+        // component: {
         component: Vue.extend({
-          // component: {
           // Component with children, nested router-view.
           render: function (h) {
             return h("router-view");
